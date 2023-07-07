@@ -22,13 +22,16 @@ File dataFile;
 void setup() {
   Serial.begin(9600);
   pinMode(FSR_Pin, INPUT);
+  pinMode(chipSelect, OUTPUT);
 
   // Initialize SD card
   if (!SD.begin(chipSelect)) {
     Serial.println("SD card initialization failed!");
     return;
   }
-
+  Serial.println("Card Initialized");
+  delay(2000);
+  
   // Create a new file for data logging
   dataFile = SD.open("data.txt", FILE_WRITE);
   if (!dataFile) {
@@ -95,5 +98,6 @@ void loop() {
     Serial.println("Error opening data file!");
   }
 
-  delay(3,600,000); // Delay for 1 hour
+delay(60000); // Delay for 1 minute
+
 }
